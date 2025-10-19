@@ -1,6 +1,6 @@
-# Sleep Calculator
+# 90sleep
 
-A beautiful, minimalist sleep cycle calculator inspired by the original [sleepyti.me](https://sleepyti.me). Calculate optimal bedtime and wake times based on 90-minute sleep cycles.
+A beautiful, minimalist sleep cycle calculator inspired by the original sleepyti.me. Calculate optimal bedtime and wake times based on 90-minute sleep cycles.
 
 ## Features
 
@@ -83,7 +83,3 @@ The calculator works backwards from your wake time or forwards from the current 
 ## License
 
 MIT
-
-## Credits
-
-Inspired by the original [sleepyti.me](https://sleepyti.me) by David Strauß

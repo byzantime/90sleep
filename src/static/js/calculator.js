@@ -82,29 +82,22 @@ function calculateWakeTimes() {
 }
 
 /**
- * Render time cards to the grid
+ * Render time rows to the table
  */
 function renderResults(results) {
-    const grid = document.getElementById('results-grid');
-    grid.innerHTML = '';
+    const tbody = document.getElementById('results-body');
+    tbody.innerHTML = '';
 
     results.forEach(result => {
-        const card = document.createElement('div');
-        card.className = `time-card fade-in ${result.isRecommended ? 'recommended' : ''}`;
+        const row = document.createElement('tr');
+        row.className = 'fade-in';
 
-        card.innerHTML = `
-            <div class="text-3xl md:text-4xl font-light text-braun-amber mb-2">
-                ${result.time}
-            </div>
-            <div class="text-xs text-braun-text-dim uppercase tracking-wide">
-                ${result.cycles} cycle${result.cycles !== 1 ? 's' : ''}
-            </div>
-            <div class="text-xs text-braun-text-dim mt-1">
-                ${result.hours} hours
-            </div>
+        row.innerHTML = `
+            <td>${result.hours} hours (${result.cycles} cycle${result.cycles !== 1 ? 's' : ''})</td>
+            <td class="${result.isRecommended ? 'recommended' : ''}">${result.time}</td>
         `;
 
-        grid.appendChild(card);
+        tbody.appendChild(row);
     });
 }
 

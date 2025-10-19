@@ -61,14 +61,22 @@
             </div>
         </div>
 
-        <!-- Results Grid -->
+        <!-- Results Table -->
         <div class="mb-12">
             <h2 class="text-center text-braun-text-dim text-sm uppercase tracking-wide mb-6" id="results-heading">
                 Recommended bedtimes
             </h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="results-grid">
-                <!-- Time cards will be inserted here by JavaScript -->
-            </div>
+            <table class="results-table" id="results-table">
+                <thead>
+                    <tr>
+                        <th>Sleep Duration</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="results-body">
+                    <!-- Table rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
         </div>
 
         <!-- Info Box -->

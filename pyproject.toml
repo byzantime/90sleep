@@ -17,11 +17,6 @@ packages = []
 [tool.black]
 line-length = 88
 unstable = true
-extend-exclude = '''
-(
-  ^/migrations
-)
-'''
 
 [tool.ruff]
 # Assume Python 3.11

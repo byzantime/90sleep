@@ -66,13 +66,41 @@
     @apply translate-x-10 bg-braun-gold;
   }
 
-  /* Time option cards */
-  .time-card {
-    @apply bg-braun-gray border border-braun-light-gray rounded-braun p-6 text-center transition-all duration-200 cursor-pointer hover:border-braun-amber hover:shadow-braun-glow;
+  /* Results Table */
+  .results-table {
+    @apply w-full max-w-2xl mx-auto border-collapse;
   }
 
-  .time-card.recommended {
-    @apply border-braun-amber shadow-braun-glow;
+  .results-table thead th {
+    @apply text-left text-braun-text-dim text-xs uppercase tracking-wide pb-3 border-b border-braun-light-gray font-normal;
+  }
+
+  .results-table tbody tr {
+    @apply border-b border-braun-light-gray transition-all duration-200;
+  }
+
+  .results-table tbody tr:last-child {
+    @apply border-b-0;
+  }
+
+  .results-table tbody tr:hover {
+    @apply bg-braun-gray bg-opacity-30;
+  }
+
+  .results-table tbody td {
+    @apply py-4 px-2 text-braun-text-dim;
+  }
+
+  .results-table tbody td:first-child {
+    @apply font-light;
+  }
+
+  .results-table tbody td:last-child {
+    @apply text-lg font-light text-right;
+  }
+
+  .results-table tbody td.recommended {
+    @apply text-braun-amber;
   }
 
   /* Braun-style input */
