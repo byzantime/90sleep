@@ -33,6 +33,7 @@ def ensure_build_dirs():
     (static_dir / "css").mkdir(parents=True, exist_ok=True)
     (static_dir / "js").mkdir(parents=True, exist_ok=True)
     (static_dir / "images").mkdir(parents=True, exist_ok=True)
+    (static_dir / "fonts").mkdir(parents=True, exist_ok=True)
 
     return build_dir
 
@@ -49,6 +50,14 @@ def copy_static_assets():
         for js_file in js_src.glob("*.js"):
             shutil.copy2(js_file, js_dest / js_file.name)
             print(f"Copied {js_file.name}")
+
+    # Copy fonts
+    fonts_src = src_static / "fonts"
+    fonts_dest = build_static / "fonts"
+    if fonts_src.exists():
+        for font_file in fonts_src.glob("*.woff2"):
+            shutil.copy2(font_file, fonts_dest / font_file.name)
+            print(f"Copied {font_file.name}")
 
     # Copy images if they exist
     img_src = src_static / "images"

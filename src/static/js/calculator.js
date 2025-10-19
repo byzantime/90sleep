@@ -188,7 +188,7 @@ function init() {
             updateCurrentTime();
             updateCalculator();
         }
-    }, 1000);
+    }, 30000);
 
     // Initial calculation
     updateCalculator();

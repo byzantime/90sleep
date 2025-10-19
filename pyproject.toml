@@ -1,5 +1,5 @@
 [project]
-name = "sleepcalc"
+name = "sleep90"
 version = "0.1.0"
 description = "Sleep cycle calculator - find optimal bedtime and wake times"
 requires-python = ">=3.8"
