@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12 md:py-20">
+    <!-- Mode Toggle Section -->
+    <div class="max-w-4xl mx-auto mb-12">
+        <div class="flex flex-col items-center space-y-6">
+            <!-- Mode Labels -->
+            <div class="flex items-center justify-center space-x-6 w-full">
+                <label class="flex-1 text-right cursor-pointer" for="mode-toggle">
+                    <span class="text-lg md:text-xl font-light transition-colors" id="wake-label">
+                        I need to wake up at...
+                    </span>
+                </label>
+
+                <!-- Toggle Switch -->
+                <div class="toggle-switch">
+                    <input type="checkbox" id="mode-toggle" aria-label="Switch calculator mode">
+                    <span class="toggle-slider"></span>
+                </div>
+
+                <label class="flex-1 text-left cursor-pointer" for="mode-toggle">
+                    <span class="text-lg md:text-xl font-light transition-colors text-braun-text-dim" id="sleep-label">
+                        I'm going to bed now
+                    </span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calculator Section -->
+    <div class="max-w-3xl mx-auto">
+        <!-- Wake Time Input Mode -->
+        <div id="wake-mode" class="mb-12">
+            <div class="text-center mb-8">
+                <label for="wake-time" class="block text-braun-text-dim text-sm uppercase tracking-wide mb-4">
+                    Wake up time
+                </label>
+                <input
+                    type="time"
+                    id="wake-time"
+                    class="braun-input w-64 mx-auto"
+                    value="07:00"
+                    aria-label="Enter your desired wake up time"
+                >
+            </div>
+        </div>
+
+        <!-- Sleep Now Mode (hidden by default) -->
+        <div id="sleep-mode" class="hidden mb-12">
+            <div class="text-center">
+                <div class="text-braun-text-dim text-sm uppercase tracking-wide mb-4">
+                    Current time
+                </div>
+                <div class="text-4xl md:text-5xl font-light text-braun-amber" id="current-time">
+                    --:--
+                </div>
+                <p class="text-braun-text-dim text-sm mt-2">
+                    (You'll fall asleep in ~14 minutes)
+                </p>
+            </div>
+        </div>
+
+        <!-- Results Grid -->
+        <div class="mb-12">
+            <h2 class="text-center text-braun-text-dim text-sm uppercase tracking-wide mb-6" id="results-heading">
+                Recommended bedtimes
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="results-grid">
+                <!-- Time cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Info Box -->
+        <div class="bg-braun-gray border border-braun-light-gray rounded-braun p-6 text-center">
+            <p class="text-braun-text-dim text-sm leading-relaxed">
+                <span class="text-braun-amber font-medium">Sleep cycles</span> last approximately
+                <span class="text-braun-text font-medium">90 minutes</span>.
+                Waking up between cycles helps you feel refreshed.
+                The highlighted times give you <span class="text-braun-text font-medium">4-6 cycles</span>
+                (6-9 hours) of sleep — the recommended amount for most adults.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/calculator.js"></script>
+{% endblock %}

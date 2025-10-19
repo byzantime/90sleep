@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  }
+}
+
+@layer components {
+  /* Braun-inspired toggle switch */
+  .toggle-switch {
+    @apply relative inline-block w-20 h-10 bg-braun-light-gray rounded-braun cursor-pointer transition-all duration-300;
+  }
+
+  .toggle-switch input {
+    @apply opacity-0 w-0 h-0;
+  }
+
+  .toggle-slider {
+    @apply absolute top-1 left-1 right-1 bottom-1 bg-braun-gray rounded-braun transition-all duration-300;
+  }
+
+  .toggle-slider:before {
+    @apply absolute content-[''] h-8 w-8 left-0 bg-braun-amber rounded-braun transition-all duration-300 shadow-braun;
+  }
+
+  input:checked + .toggle-slider {
+    @apply bg-braun-dark;
+  }
+
+  input:checked + .toggle-slider:before {
+    @apply translate-x-10 bg-braun-gold;
+  }
+
+  /* Time option cards */
+  .time-card {
+    @apply bg-braun-gray border border-braun-light-gray rounded-braun p-6 text-center transition-all duration-200 cursor-pointer hover:border-braun-amber hover:shadow-braun-glow;
+  }
+
+  .time-card.recommended {
+    @apply border-braun-amber shadow-braun-glow;
+  }
+
+  /* Braun-style input */
+  .braun-input {
+    @apply bg-braun-dark border border-braun-light-gray text-braun-text text-2xl text-center p-4 rounded-braun focus:outline-none focus:border-braun-amber focus:shadow-braun-glow transition-all duration-200;
+  }
+
+  /* Smooth animations */
+  .fade-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

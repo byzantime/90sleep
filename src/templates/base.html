@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-braun-black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}Sleep Calculator - Find Your Perfect Bedtime{% endblock %}</title>
+    <meta name="description" content="{% block description %}Calculate optimal sleep and wake times based on 90-minute sleep cycles. Wake up refreshed by timing your sleep correctly.{% endblock %}">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block og_title %}Sleep Calculator{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Calculate optimal sleep and wake times based on sleep cycles{% endblock %}">
+    <meta property="og:site_name" content="Sleep Calculator">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{% block twitter_title %}Sleep Calculator{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Calculate optimal sleep and wake times{% endblock %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+    {% block head %}{% endblock %}
+</head>
+<body class="bg-braun-black text-braun-text font-sans antialiased min-h-screen">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="border-b border-braun-gray">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-2xl font-light tracking-tight text-braun-amber">
+                        sleep<span class="text-braun-text">calc</span>
+                    </h1>
+                    <nav class="text-sm text-braun-text-dim">
+                        <a href="#about" class="hover:text-braun-amber transition-colors">About</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-braun-gray mt-16">
+            <div class="container mx-auto px-4 py-8">
+                <div class="grid md:grid-cols-2 gap-8 text-sm text-braun-text-dim">
+                    <div id="about">
+                        <h3 class="text-braun-text font-medium mb-2">About Sleep Cycles</h3>
+                        <p class="mb-2">
+                            Sleep occurs in cycles of approximately 90 minutes. Each cycle consists of different stages,
+                            from light sleep to deep sleep and REM sleep.
+                        </p>
+                        <p>
+                            Waking up between cycles (rather than during a cycle) helps you feel more refreshed and alert.
+                            This calculator accounts for the average 14 minutes it takes to fall asleep.
+                        </p>
+                    </div>
+                    <div class="md:text-right">
+                        <p class="mb-2">
+                            Inspired by the original <a href="https://sleepyti.me" class="text-braun-amber hover:text-braun-gold transition-colors" target="_blank" rel="noopener">sleepyti.me</a>
+                        </p>
+                        <p class="text-xs">
+                            Built with Tailwind CSS, Jinja2, and deployed on Netlify
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

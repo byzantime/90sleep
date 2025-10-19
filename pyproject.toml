@@ -1,0 +1,44 @@
+[project]
+name = "sleepcalc"
+version = "0.1.0"
+description = "Sleep cycle calculator - find optimal bedtime and wake times"
+requires-python = ">=3.8"
+dependencies = [
+    "jinja2>=3.0",
+    "python-dateutil>=2.8",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = []
+
+[tool.black]
+line-length = 88
+unstable = true
+extend-exclude = '''
+(
+  ^/migrations
+)
+'''
+
+[tool.ruff]
+# Assume Python 3.11
+target-version = "py311"
+
+[tool.ruff.lint]
+# Enable pycodestyle (`E`), Pyflakes (`F`), and isort (`I`) codes by default
+select = ["E", "F", "I", "C90", "D205", "D212"]
+ignore = ["F402", "E501"]
+
+[tool.ruff.format]
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+[tool.ruff.lint.mccabe]
+# Flag errors if max complexity exceeded
+max-complexity = 10
+
+[tool.ruff.lint.isort]
+force-single-line = true
