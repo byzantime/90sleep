@@ -16,3 +16,7 @@ build/
 
 # Local Netlify folder
 .netlify
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
