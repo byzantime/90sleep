@@ -11,6 +11,20 @@ const RECOMMENDED_CYCLES = [4, 5, 6]; // 6-9 hours of sleep
 
 // State
 let currentMode = 'wake'; // 'wake' or 'sleep'
+let demoTime = null; // For demo screenshots, use format HH:MM (24-hour)
+
+/**
+ * Get current time (or demo time if set)
+ */
+function getCurrentTime() {
+    if (demoTime) {
+        const [hours, minutes] = demoTime.split(':').map(Number);
+        const date = new Date();
+        date.setHours(hours, minutes, 0, 0);
+        return date;
+    }
+    return new Date();
+}
 
 /**
  * Format time as HH:MM AM/PM
@@ -67,7 +81,7 @@ function calculateBedtimes(wakeTimeStr) {
  * Calculate wake times based on current time (sleeping now)
  */
 function calculateWakeTimes() {
-    const now = new Date();
+    const now = getCurrentTime();
     const sleepTime = new Date(now.getTime() + FALL_ASLEEP_MINUTES * 60000);
 
     const results = [];
@@ -122,7 +136,7 @@ function updateCalculator() {
  * Update current time display
  */
 function updateCurrentTime() {
-    const now = new Date();
+    const now = getCurrentTime();
     document.getElementById('current-time').textContent = formatTime(now);
 }
 
@@ -163,6 +177,12 @@ function toggleMode() {
  * Initialize the calculator
  */
 function init() {
+    // Check for demoTime URL parameter
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('demoTime')) {
+        demoTime = params.get('demoTime');
+    }
+
     const toggle = document.getElementById('mode-toggle');
     const wakeTimeInput = document.getElementById('wake-time');
 
