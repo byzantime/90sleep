@@ -5,7 +5,6 @@ description = "Sleep cycle calculator - find optimal bedtime and wake times"
 requires-python = ">=3.8"
 dependencies = [
     "jinja2>=3.0",
-    "python-dateutil>=2.8",
 ]
 
 [tool.hatch.metadata]
