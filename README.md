@@ -25,7 +25,7 @@ A beautiful, minimalist sleep cycle calculator inspired by the original sleepyti
 
 ### Prerequisites
 
-- Python 3.8+
+- Python 3.12+
 - Node.js 18+
 - [uv](https://github.com/astral-sh/uv) package manager
 
