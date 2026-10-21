@@ -5,10 +5,46 @@ Builds the static site using Jinja2 templates
 """
 
 import shutil
+from datetime import datetime
+from datetime import timedelta
 from pathlib import Path
 
 from jinja2 import Environment
 from jinja2 import FileSystemLoader
+
+CYCLE_LENGTH_MINUTES = 90
+FALL_ASLEEP_MINUTES = 14
+CHART_CYCLES = range(1, 7)
+CHART_WAKE_TIMES = ("05:00", "06:00", "07:00")
+
+
+def format_clock(moment):
+    """Format a datetime as a 12-hour clock time, e.g. "10:46 PM"."""
+    return moment.strftime("%I:%M %p").lstrip("0")
+
+
+def build_cycle_chart():
+    """Build the static 90-minute sleep cycle chart.
+
+    Uses the same arithmetic as calculator.js: a bedtime is the wake time
+    minus whole 90-minute cycles minus the fall-asleep buffer.
+    """
+    wake_times = [datetime.strptime(t, "%H:%M") for t in CHART_WAKE_TIMES]
+    rows = []
+    for cycles in CHART_CYCLES:
+        asleep = timedelta(minutes=cycles * CYCLE_LENGTH_MINUTES)
+        in_bed = asleep + timedelta(minutes=FALL_ASLEEP_MINUTES)
+        rows.append(
+            {
+                "cycles": cycles,
+                "hours": f"{asleep.total_seconds() / 3600:g}",
+                "bedtimes": [format_clock(wake - in_bed) for wake in wake_times],
+            }
+        )
+    return {
+        "wake_times": [format_clock(wake) for wake in wake_times],
+        "rows": rows,
+    }
 
 
 def setup_jinja_env():
@@ -79,6 +115,18 @@ def render_template(env, template_name, output_path, context=None):
     print(f"Generated {output_path}")
 
 
+def index_context():
+    """Build the template context for the homepage"""
+    return {
+        "title": "Sleep Calculator - Find Your Perfect Bedtime",
+        "description": (
+            "Calculate optimal sleep and wake times based on 90-minute sleep cycles"
+        ),
+        "fall_asleep_minutes": FALL_ASLEEP_MINUTES,
+        "cycle_chart": build_cycle_chart(),
+    }
+
+
 def build_site():
     """Main build function"""
     print("Building Sleep Calculator...")
@@ -90,13 +138,7 @@ def build_site():
     copy_static_assets()
 
     print("\nGenerating HTML pages...")
-    context = {
-        "title": "Sleep Calculator - Find Your Perfect Bedtime",
-        "description": (
-            "Calculate optimal sleep and wake times based on 90-minute sleep cycles"
-        ),
-    }
-    render_template(env, "index.html", build_dir / "index.html", context)
+    render_template(env, "index.html", build_dir / "index.html", index_context())
 
     print("\n✓ Build complete!")
     print(f"Output directory: {build_dir}")

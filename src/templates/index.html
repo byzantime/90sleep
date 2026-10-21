@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-12 md:py-20">
+<div class="container mx-auto px-4 py-10 md:py-16">
+    <h1 class="text-center text-2xl md:text-3xl font-light tracking-tight text-braun-text mb-10 md:mb-12">
+        90 Minute Sleep Cycle Calculator
+    </h1>
+
     <!-- Mode Toggle Section -->
     <div class="max-w-4xl mx-auto mb-12">
         <div class="flex flex-col items-center space-y-6">
@@ -56,7 +60,7 @@
                     --:--
                 </div>
                 <p class="text-braun-text-dim text-sm mt-2">
-                    (You'll fall asleep in ~14 minutes)
+                    (You'll fall asleep in ~{{ fall_asleep_minutes }} minutes)
                 </p>
             </div>
         </div>
@@ -90,6 +94,170 @@
             </p>
         </div>
     </div>
+
+    <!-- Explainer, chart and FAQ -->
+    <article id="about" class="sleep-content max-w-3xl mx-auto mt-20 md:mt-28 pt-12 border-t border-braun-gray">
+        <section aria-labelledby="what-is-heading">
+            <h2 id="what-is-heading">What is the 90-minute sleep cycle?</h2>
+            <p>
+                Sleep is not one continuous state. Through the night your brain moves through a
+                repeating sequence of stages, and one pass through that sequence is called a
+                sleep cycle. For most adults a cycle lasts somewhere between about 80 and 120
+                minutes, so 90 minutes is a convenient average rather than a fixed rule.
+            </p>
+            <p>Each cycle moves through three broad kinds of sleep:</p>
+            <ul>
+                <li>
+                    <strong>Light sleep</strong> (stages N1 and N2). The transition from wakefulness:
+                    your heart rate and breathing slow and your body temperature drops. Adults
+                    spend roughly half the night here.
+                </li>
+                <li>
+                    <strong>Deep sleep</strong> (stage N3, also called slow-wave sleep). The hardest
+                    stage to wake from and the one most associated with physical recovery. Deep
+                    sleep is concentrated in the first few cycles of the night.
+                </li>
+                <li>
+                    <strong>REM sleep</strong>. The stage in which most vivid dreaming happens. REM
+                    periods are short early in the night and grow longer in later cycles, which
+                    is why you often wake from a dream in the morning.
+                </li>
+            </ul>
+            <p>
+                Is everyone's sleep cycle 90 minutes? No. Cycle length varies from person to
+                person and even from one cycle to the next in the same night, and it is affected
+                by age, recent sleep loss, alcohol and caffeine. Treat the 90-minute figure as a
+                useful starting point, and adjust if you find you reliably wake up groggy at the
+                suggested times.
+            </p>
+        </section>
+
+        <section aria-labelledby="how-it-works-heading">
+            <h2 id="how-it-works-heading">How this sleep cycle calculator works</h2>
+            <p>
+                Waking up in the middle of deep sleep tends to leave you feeling heavy and
+                disoriented, a state known as sleep inertia. Waking near the end of a cycle,
+                when sleep is lighter, is usually easier. The calculator tries to line your
+                alarm up with those lighter moments.
+            </p>
+            <p>
+                In <strong>“I need to wake up at…”</strong> mode, it starts from your wake-up time
+                and counts backwards in 90-minute steps, then subtracts a further
+                {{ fall_asleep_minutes }} minutes, roughly how long it takes the average person to
+                fall asleep. The result is the time to be in bed with the lights off.
+            </p>
+            <p>
+                In <strong>“I'm going to bed now”</strong> mode, it does the reverse: it adds
+                {{ fall_asleep_minutes }} minutes to the current time and then counts forwards in
+                90-minute steps to give you a list of wake-up times.
+            </p>
+            <p>
+                The highlighted results are 4, 5 or 6 cycles (6, 7.5 or 9 hours of sleep), which
+                covers the 7–9 hours generally recommended for adults. Shorter options are shown
+                for nights when time is tight, but they are not a substitute for a full night.
+            </p>
+        </section>
+
+        <section aria-labelledby="chart-heading">
+            <h2 id="chart-heading">90-minute sleep cycle chart</h2>
+            <p>
+                The chart below shows how many hours of sleep each number of cycles gives you,
+                and when to go to bed for some common wake-up times. Bedtimes include the
+                {{ fall_asleep_minutes }}-minute allowance for falling asleep.
+            </p>
+            <div class="overflow-x-auto">
+                <table class="chart-table">
+                    <caption class="sr-only">Sleep cycles, hours of sleep and bedtimes for common wake-up times</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Cycles</th>
+                            <th scope="col">Sleep</th>
+                            {% for wake_time in cycle_chart.wake_times %}
+                            <th scope="col">Wake {{ wake_time }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in cycle_chart.rows %}
+                        <tr>
+                            <th scope="row">{{ row.cycles }}</th>
+                            <td>{{ row.hours }} h</td>
+                            {% for bedtime in row.bedtimes %}
+                            <td>{{ bedtime }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <p>
+                <strong>How many sleep cycles is 8 hours?</strong> About five and a third. Five full
+                cycles take 7.5 hours, so if you have an 8-hour window, aiming for five cycles
+                plus the time it takes to drift off fits neatly.
+            </p>
+            <p>
+                <strong>How many hours of sleep is 9pm to 5am?</strong> That is 8 hours in bed.
+                Allowing around a quarter of an hour to fall asleep leaves about 7¾ hours of actual
+                sleep, which is just over five 90-minute cycles.
+            </p>
+        </section>
+
+        <section aria-labelledby="faq-heading">
+            <h2 id="faq-heading">Frequently asked questions</h2>
+
+            <h3>How many 90-minute sleep cycles do you need?</h3>
+            <p>
+                Most adults need about five cycles (7.5 hours) a night, and somewhere between
+                four and six cycles (6–9 hours) covers most people. Teenagers and children need
+                more. How you feel during the day is a better guide than any formula.
+            </p>
+
+            <h3>Is 90 minutes a full sleep cycle?</h3>
+            <p>
+                For many adults it is close, but not exactly. A full cycle usually takes 80–120
+                minutes, and cycles later in the night tend to be different in make-up from
+                earlier ones. Ninety minutes is a practical average for planning, not a
+                measurement of your own sleep.
+            </p>
+
+            <h3>Is 4.5 hours of sleep enough?</h3>
+            <p>
+                Three cycles may help you wake up less groggy than an arbitrary short night, but
+                4.5 hours is well below what adults need. Regularly sleeping this little leads to
+                accumulated sleep debt, so keep it for genuine emergencies.
+            </p>
+
+            <h3>Is 6 hours of sleep enough?</h3>
+            <p>
+                Six hours is four complete cycles and is a reasonable fallback on a busy night.
+                Over weeks, though, most adults who sleep six hours perform worse than they
+                would with seven or more, often without noticing it themselves.
+            </p>
+
+            <h3>Is 7.5 hours of sleep enough?</h3>
+            <p>
+                For most adults, yes. Five cycles land within the commonly recommended 7–9 hours,
+                and 7.5 hours is often the sweet spot this calculator points towards.
+            </p>
+
+            <h3>What is the “90 minute rule” for sleep?</h3>
+            <p>
+                It is the idea of timing your sleep in multiples of 90 minutes, so that your alarm
+                goes off at the end of a cycle rather than in the middle of one. It is a rule of
+                thumb, not a law of biology: it works best alongside a consistent bedtime and
+                enough total sleep.
+            </p>
+
+            <h3>Is a 90-minute nap a good idea?</h3>
+            <p>
+                A 90-minute nap gives you roughly one complete cycle, including some deep and REM
+                sleep, so you are less likely to wake up mid-cycle than after a 45- or 60-minute
+                nap. If you only have a short window, a 10–20 minute nap that stays in light sleep
+                is the other common choice. Avoid long naps late in the day, as they can make it
+                harder to fall asleep at night.
+            </p>
+        </section>
+    </article>
 </div>
 {% endblock %}
 

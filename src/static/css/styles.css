@@ -103,6 +103,62 @@
     @apply text-braun-amber;
   }
 
+  /* Long-form explainer content */
+  .sleep-content {
+    @apply text-braun-text-dim leading-relaxed;
+  }
+
+  .sleep-content section + section {
+    @apply mt-14;
+  }
+
+  .sleep-content h2 {
+    @apply text-xl md:text-2xl font-light tracking-tight text-braun-text mb-5;
+  }
+
+  .sleep-content h3 {
+    @apply text-base font-medium text-braun-text mt-8 mb-2;
+  }
+
+  .sleep-content p,
+  .sleep-content ul {
+    @apply mb-4;
+  }
+
+  .sleep-content ul {
+    @apply space-y-3 pl-5 list-disc marker:text-braun-amber;
+  }
+
+  .sleep-content strong {
+    @apply font-medium text-braun-text;
+  }
+
+  /* Static sleep cycle chart */
+  .chart-table {
+    @apply w-full border-collapse text-sm my-6 whitespace-nowrap;
+  }
+
+  .chart-table thead th {
+    @apply text-left align-bottom whitespace-normal text-braun-text-dim text-xs uppercase tracking-wide pb-3 px-1.5 md:px-2 border-b border-braun-light-gray font-normal;
+  }
+
+  .chart-table tbody tr {
+    @apply border-b border-braun-light-gray;
+  }
+
+  .chart-table tbody tr:last-child {
+    @apply border-b-0;
+  }
+
+  .chart-table tbody th,
+  .chart-table tbody td {
+    @apply py-3 px-1.5 md:px-2 text-left font-light;
+  }
+
+  .chart-table tbody th {
+    @apply text-braun-amber font-normal;
+  }
+
   /* Braun-style input */
   .braun-input {
     @apply bg-braun-dark border border-braun-light-gray text-braun-text text-2xl text-center p-4 rounded-braun focus:outline-none focus:border-braun-amber focus:shadow-braun-glow transition-all duration-200;
