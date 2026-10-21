@@ -57,6 +57,11 @@ Watch mode for CSS changes:
 npm run dev
 ```
 
+Run the tests:
+```bash
+uv run python -m unittest
+```
+
 Build for production:
 ```bash
 uv run python main.py && npm run build
