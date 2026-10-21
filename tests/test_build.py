@@ -42,10 +42,7 @@ def collect(html, tag):
 
 def render_index():
     env = main.setup_jinja_env()
-    return env.get_template("index.html").render(
-        fall_asleep_minutes=main.FALL_ASLEEP_MINUTES,
-        cycle_chart=main.build_cycle_chart(),
-    )
+    return env.get_template("index.html").render(**main.index_context())
 
 
 def js_constant(name):

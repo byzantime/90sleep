@@ -115,6 +115,18 @@ def render_template(env, template_name, output_path, context=None):
     print(f"Generated {output_path}")
 
 
+def index_context():
+    """Build the template context for the homepage"""
+    return {
+        "title": "Sleep Calculator - Find Your Perfect Bedtime",
+        "description": (
+            "Calculate optimal sleep and wake times based on 90-minute sleep cycles"
+        ),
+        "fall_asleep_minutes": FALL_ASLEEP_MINUTES,
+        "cycle_chart": build_cycle_chart(),
+    }
+
+
 def build_site():
     """Main build function"""
     print("Building Sleep Calculator...")
@@ -126,15 +138,7 @@ def build_site():
     copy_static_assets()
 
     print("\nGenerating HTML pages...")
-    context = {
-        "title": "Sleep Calculator - Find Your Perfect Bedtime",
-        "description": (
-            "Calculate optimal sleep and wake times based on 90-minute sleep cycles"
-        ),
-        "fall_asleep_minutes": FALL_ASLEEP_MINUTES,
-        "cycle_chart": build_cycle_chart(),
-    }
-    render_template(env, "index.html", build_dir / "index.html", context)
+    render_template(env, "index.html", build_dir / "index.html", index_context())
 
     print("\n✓ Build complete!")
     print(f"Output directory: {build_dir}")
